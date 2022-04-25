@@ -1,13 +1,15 @@
 package model;
 
 public class ShiftSystem {
-	public static int SHIFT_NUM = 0;
-	public static int SHIFT_LIMIT_NUM = 50;
+	public static int SHIFT_NUM;
+	public static int SHIFT_LIMIT_NUM;
 	
 	private CircularLinkedList list;
 	
 	public ShiftSystem() {
-		setList(new CircularLinkedList());
+		SHIFT_NUM = 0;
+		SHIFT_LIMIT_NUM = 51;
+		list = new CircularLinkedList();
 	}
 
 	
@@ -23,9 +25,25 @@ public class ShiftSystem {
 	}
 	
 	
-	public String print() {
+	public String printList() {
 		String info = list.toString();
 		return info;
+	}
+	
+	
+	public String printCurrentShift() {
+		String info = "" + list.getCurrentTurn().getValue();	
+		return info;
+	}
+	
+	public 
+	
+	
+	public boolean deleteTurn() {
+		if(list.deleteCurrentShift()) {
+			return true;
+		}
+		 return false;
 	}
 	
 	public CircularLinkedList getList() {

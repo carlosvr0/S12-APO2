@@ -6,29 +6,106 @@ public class CircularLinkedList {
 	private Node last;
 	private Node currentTurn;
 	
-	
 	public CircularLinkedList() {}
 	
 	
 	public void addTurn(int value) {
 		Node newNode = new Node(value);
 
-		if (first == null) { // Lista vacia
+		if (isEmpty()) { // Lista vacia
 			first = newNode;
+			currentTurn = first;
 			last = newNode;
 			
 			first.setNext(first);
 			first.setPrev(first);
+			
 		} else {
 			last.setNext(newNode);
 			newNode.setPrev(last);
 			last = newNode;
-
-			first.setPrev(last);
+			
 			last.setNext(first);
+			first.setPrev(last);		
 		}
 	}
 	
+	
+	public boolean isEmpty() {
+		if(first == null) {
+			return true;
+		} 
+		
+		return false;
+	}
+	
+	
+	public boolean deleteCurrentShift() {
+		boolean deleted = false;
+
+		if(isEmpty()) {
+			return false;
+		}
+		
+		Node temp = first;
+		
+		do {
+			if (temp.getValue() == currentTurn.getValue()) {
+				
+				if (temp == first && temp == last) {
+					first = null;
+					last = null;
+					currentTurn = null;
+				} else if (temp == first) {
+					
+					first = first.getNext();
+					first.setPrev(last);
+					last.setNext(first);
+					
+					currentTurn = currentTurn.getNext();
+					
+				} else if (temp == last) {
+					
+					last = last.getPrev();
+					last.setNext(first);
+					first.setPrev(last);
+					
+					currentTurn = first;
+					
+				} else {
+					
+					temp.getPrev().setNext(temp.getNext());
+					temp.getNext().setPrev(temp.getPrev());
+					
+					currentTurn = temp.getNext();
+				}
+				
+				deleted = true;
+			} else {
+				temp = temp.getNext();
+			}
+
+		} while (temp != first && !deleted);
+		
+		return deleted;
+	}
+	
+	
+	public void passCurrentShift() {
+		String info = "";
+		
+		if(currentTurn.getCalls() >= 3) {
+			
+			info = "Current turn (" + currentTurn.getValue() + ") removed";
+			deleteCurrentShift();
+			
+		}else {
+			currentTurn.setCalls();
+			info = "Current turn (" + currentTurn.getValue() + ") has been called " + currentTurn.getCalls() + " times";
+		}
+		
+		//return info;
+	}
 	
 	
 	
@@ -55,16 +132,27 @@ public class CircularLinkedList {
 	
 	@Override
 	public String toString() {
+		
 		String info = "";
 		
 		if(first == null) {
-			info += "=============\n";
+			info = "=============\n";
 			info += "  No shifts  \n";
 			info += "=============";
+			
+		} else {
+			
+			Node temp = first;
+			
+			while (temp.getNext() != first) {
+				info += " [" + temp.getValue() + "]";
+				temp = temp.getNext();
+			}
+			
+			info += " [" + temp.getValue() + "]";
+
 		}
-		
-		info += "" + first.toString();
-		
+
 		return info;
 	}
 	

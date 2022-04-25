@@ -5,9 +5,12 @@ public class Node {
 	private int value;
 	private Node next;
 	private Node prev;
+	private int calls;
+	
 	
 	public Node(int value) {
 		this.value = value;
+		this.calls = 0;
 	}
 	
 	
@@ -32,15 +35,25 @@ public class Node {
 		this.prev = prev;
 	}
 	
+	public int getCalls() {
+		return calls;
+	}
+	public void setCalls() {
+		calls++;
+	}
+	
 	@Override
 	public String toString() {
 		String info = "[" + value + "]";
 
-		if (next != null) {
+		if (next != next.getPrev()) {
 			info += " [" + next.getValue() + "]";
 		}
 
 		return info;
 	}
+
+
+	
 	
 }
