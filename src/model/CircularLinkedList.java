@@ -94,15 +94,24 @@ public class CircularLinkedList {
 	public String passShift() {
 		String info = "";
 		
-		if(currentTurn.getCalls() >= 3) {
+		Node temp = currentTurn;
+		
+		if(temp.getCalls() == 3) {
 			
 			info = "Current turn (" + currentTurn.getValue() + ") removed";
 			deleteCurrentShift();
 			
 		}else {
-			currentTurn.setCalls();
-			info = "Current turn (" + currentTurn.getValue() + ") has been called " + currentTurn.getCalls() + " times";
-
+			temp.setCalls();
+			
+			if(temp.getCalls() == 2) {
+				info = "Current turn (" + temp.getValue() + ") has been called twice";
+			} else {
+				info = "Current turn (" + temp.getValue() + ") has been called " + temp.getCalls() + " times";
+			}
+			
+			
+			currentTurn = currentTurn.getNext();
 		}
 		
 		return info;
@@ -133,7 +142,7 @@ public class CircularLinkedList {
 		
 		String info = "";
 		
-		if(first == null) {
+		if(isEmpty()) {
 			info = "=============\n";
 			info += "  No shifts  \n";
 			info += "=============";

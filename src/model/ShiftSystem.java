@@ -32,7 +32,12 @@ public class ShiftSystem {
 	
 	
 	public String printCurrentShift() {
-		String info = "" + list.getCurrentTurn().getValue();	
+		String info = "";
+		
+		if(!list.isEmpty()) {
+			 info = "" + list.getCurrentTurn().getValue();
+		}
+		
 		return info;
 	}
 
