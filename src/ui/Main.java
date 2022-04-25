@@ -53,7 +53,7 @@ public class Main {
 					
 				break;
 				case 3:
-					
+					System.out.println(controller.passCurrentShift());
 					
 				break;
 				case 4:
@@ -71,7 +71,8 @@ public class Main {
 				break;
 				
 			}
-			
+		
+			System.out.println("");
 		} while (chosenOption != 5);
 	}
 

@@ -35,16 +35,20 @@ public class ShiftSystem {
 		String info = "" + list.getCurrentTurn().getValue();	
 		return info;
 	}
-	
-	public 
-	
-	
+
 	public boolean deleteTurn() {
 		if(list.deleteCurrentShift()) {
 			return true;
 		}
 		 return false;
 	}
+	
+	public String passCurrentShift() {
+		String info = "" + list.passShift();
+		return info;
+	}
+	
+	
 	
 	public CircularLinkedList getList() {
 		return list;

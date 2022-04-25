@@ -91,7 +91,7 @@ public class CircularLinkedList {
 	}
 	
 	
-	public void passCurrentShift() {
+	public String passShift() {
 		String info = "";
 		
 		if(currentTurn.getCalls() >= 3) {
@@ -102,15 +102,13 @@ public class CircularLinkedList {
 		}else {
 			currentTurn.setCalls();
 			info = "Current turn (" + currentTurn.getValue() + ") has been called " + currentTurn.getCalls() + " times";
+
 		}
 		
-		//return info;
+		return info;
 	}
 	
-	
-	
-	
-	
+
 	public Node getFirst() {
 		return first;
 	}
